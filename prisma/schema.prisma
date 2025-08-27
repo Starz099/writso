@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  articles      Article[]
+}
+
+model ArticleStatement {
+  id        String    @id @default(cuid())
+  title     String
+  prompt    String // statement or detailed description
+  articles  Article[] // all articles linked to this statement
+  createdAt DateTime  @default(now())
+}
+
+model Article {
+  id          String            @id @default(cuid())
+  title       String
+  content     String
+  user        User              @relation(fields: [userId], references: [id])
+  userId      String
+  statement   ArticleStatement? @relation(fields: [statementId], references: [id])
+  statementId String? // optional (null for freestyle writing)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
