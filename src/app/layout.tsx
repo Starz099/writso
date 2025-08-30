@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
-import Navbar from "@/components/Navbar/navbar";
-import Footer from "@/components/Footer/footer";
+import Navbar from "@/app/_components/Navbar/navbar";
+import Footer from "@/app/_components/Footer/footer";
 
 export const metadata: Metadata = {
   title: "Writso",
@@ -18,10 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true} className={`antialiased`}>
         <Providers>
-          <div className="min-h-screen relative">
+          <div className="relative min-h-screen">
             <Navbar />
             {children}
-            <Footer/>
+            <Footer />
           </div>
         </Providers>
       </body>
