@@ -1,34 +1,33 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-const Prisma = new PrismaClient();
-export const GET = async (
+const prisma = new PrismaClient();
+
+export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } },
-) => {
+) {
   const { id } = params;
 
   if (!id) {
-    return new NextResponse(JSON.stringify({ error: "ID is required" }), {
-      status: 400,
-    });
+    return NextResponse.json({ error: "ID is required" }, { status: 400 });
   }
 
   try {
-    const Statement = await Prisma.articleStatement.findUnique({
+    const statement = await prisma.articleStatement.findUnique({
       where: { id },
     });
 
-    return new NextResponse(JSON.stringify(Statement), {
-      status: 200,
-    });
+    if (!statement) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(statement, { status: 200 });
   } catch (e) {
-    console.log(`Error while fetching statement of id ${id} in api`, e);
-    return new NextResponse(
-      JSON.stringify({ error: "Internal Server Error" }),
-      {
-        status: 500,
-      },
+    console.error(`Error while fetching statement of id ${id} in api`, e);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
     );
   }
-};
+}
