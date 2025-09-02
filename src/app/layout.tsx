@@ -18,9 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true} className={`antialiased`}>
         <Providers>
-          <div className="relative min-h-screen">
+          <div className="relative flex min-h-screen flex-col">
             <Navbar />
-            {children}
+            <div className="flex-1">{children}</div>
             <Footer />
           </div>
         </Providers>
