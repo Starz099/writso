@@ -1,5 +1,6 @@
 "use client";
 import Description from "@/app/_components/Description/Description";
+import TextEditor from "@/app/_components/TextEditor/TextEditor";
 import { use } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
@@ -12,7 +13,9 @@ const Workspace = ({ params }: { params: { id: string } }) => {
           <Description statementId={id} />
         </Panel>
         <PanelResizeHandle className="w-1 cursor-col-resize bg-gray-300 hover:bg-gray-400" />
-        <Panel defaultSize={60} minSize={30}></Panel>
+        <Panel defaultSize={60} minSize={30}>
+          <TextEditor />
+        </Panel>
       </PanelGroup>
     </div>
   );

@@ -20,7 +20,7 @@ export default function RootLayout({
         <Providers>
           <div className="relative flex min-h-screen flex-col">
             <Navbar />
-            <div className="flex-1 ">{children}</div>
+            <div className="flex-1">{children}</div>
             <Footer />
           </div>
         </Providers>

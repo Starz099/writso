@@ -3,19 +3,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface DescriptionProps {
-    statementId: string;
+  statementId: string;
 }
 
-const Description = ({ statementId } : DescriptionProps) => {
-
+const Description = ({ statementId }: DescriptionProps) => {
   const [statement, setStatement] = useState<ArticleStatement>();
 
   useEffect(() => {
     const fetchStatement = async () => {
       try {
         const response = await axios.get<ArticleStatement>(
-          `/api/article?id=${statementId}`);
-          
+          `/api/article/${statementId}`,
+        );
         setStatement(response.data);
       } catch (error) {
         console.error("Failed to fetch daily statement:", error);
@@ -25,12 +24,11 @@ const Description = ({ statementId } : DescriptionProps) => {
   }, [statementId]);
   return (
     <div>
-      {statement?.title}
-      <br/>
+      <h1 className="text-4xl">{statement?.title}</h1>
+      <br />
       {statement?.prompt}
-
     </div>
-  )
-}
+  );
+};
 
-export default Description
+export default Description;

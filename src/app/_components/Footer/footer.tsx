@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="absolute bottom-2 w-full text-center border-t-2 px-auto rounded-full mx-auto">
+    <div className="px-auto absolute bottom-2 mx-auto w-full rounded-full border-t-2 text-center">
       Copyright 2025 @Starz099
     </div>
   );
