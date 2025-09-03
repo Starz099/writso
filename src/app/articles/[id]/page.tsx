@@ -5,6 +5,7 @@ import { use } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 const Workspace = ({ params }: { params: { id: string } }) => {
+  //@ts-expect-error params type
   const { id } = use(params);
   return (
     <div className="h-[calc(100vh-85px)] w-full">
