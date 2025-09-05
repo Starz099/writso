@@ -1,21 +1,47 @@
 "use client";
 import Description from "@/app/_components/Description/Description";
 import TextEditor from "@/app/_components/TextEditor/TextEditor";
-import { use } from "react";
+import { Button } from "@/app/_components/ui/button";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { use, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 const Workspace = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params);
+  const [attempt, setAttempt] = useState("");
+  const { data: session } = useSession();
+  // console.log("session in Workspace", session?.user?.email);
+
+  const onChange = (content: string) => {
+    setAttempt(content);
+  }
+  
+  const submitArticle = async () => {
+    console.log("Submitting article", {id, attempt, userEmail: session?.user?.email});
+    try {
+      await axios.post(`/api/article/${id}`, {
+        content: attempt,
+        userEmail: session?.user?.email as string,
+      });
+      alert("Article submitted successfully");
+    } catch (e) {
+      console.error("Error while submitting article", e);
+    }    
+  }
 
   return (
     <div className="h-[calc(100vh-85px)] w-full">
       <PanelGroup direction="horizontal">
-        <Panel defaultSize={40} minSize={30} className="px-6 py-6">
+        <Panel defaultSize={40} minSize={30} className="p-6">
           <Description statementId={id} />
         </Panel>
         <PanelResizeHandle className="w-1 cursor-col-resize bg-gray-300 hover:bg-gray-400" />
-        <Panel defaultSize={60} minSize={30}>
-          <TextEditor />
+        <Panel defaultSize={60} minSize={30} className="bg-red-50 p-4">
+          <div className="relative">
+            <TextEditor content={attempt} onChange={onChange}/>
+            <Button className="absolute right-0 mt-2 cursor-pointer" onClick={submitArticle}>Submit</Button>
+          </div>
         </Panel>
       </PanelGroup>
     </div>
