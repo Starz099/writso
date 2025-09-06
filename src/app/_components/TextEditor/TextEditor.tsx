@@ -8,7 +8,7 @@ interface TextEditorProps {
   onChange: (content: string) => void;
 }
 
-const TextEditor = ({content, onChange}: TextEditorProps) => {
+const TextEditor = ({ content, onChange }: TextEditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: content,
@@ -20,13 +20,15 @@ const TextEditor = ({content, onChange}: TextEditorProps) => {
           "bg-teal-100 p-2 border-2 h-145 rounded-xl overflow-scroll focus:outline-none",
       },
     },
-    onUpdate: ({editor}) => {
+    onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
-    }
+    },
   });
-  return<div className="">
-   <EditorContent editor={editor} />
-  </div>
+  return (
+    <div className="">
+      <EditorContent editor={editor} />
+    </div>
+  );
 };
 
 export default TextEditor;

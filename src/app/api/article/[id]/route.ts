@@ -48,13 +48,15 @@ export async function POST(
   try {
     const { content, userEmail } = await request.json();
 
-    const userId = (await prisma.user.findFirst({
-      where: {email: userEmail}
-    }))?.id;
-    
+    const userId = (
+      await prisma.user.findFirst({
+        where: { email: userEmail },
+      })
+    )?.id;
+
     console.log("userid", userId);
-    if(!userId) {
-      return NextResponse.json({error: "User not found"}, {status: 404});
+    if (!userId) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     await prisma.article.create({

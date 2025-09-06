@@ -11,14 +11,18 @@ const Workspace = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params);
   const [attempt, setAttempt] = useState("");
   const { data: session } = useSession();
-  // console.log("session in Workspace", session?.user?.email);
+  console.log("session in Workspace", session);
 
   const onChange = (content: string) => {
     setAttempt(content);
-  }
-  
+  };
+
   const submitArticle = async () => {
-    console.log("Submitting article", {id, attempt, userEmail: session?.user?.email});
+    console.log("Submitting article", {
+      id,
+      attempt,
+      userEmail: session?.user?.email,
+    });
     try {
       await axios.post(`/api/article/${id}`, {
         content: attempt,
@@ -27,8 +31,8 @@ const Workspace = ({ params }: { params: Promise<{ id: string }> }) => {
       alert("Article submitted successfully");
     } catch (e) {
       console.error("Error while submitting article", e);
-    }    
-  }
+    }
+  };
 
   return (
     <div className="h-[calc(100vh-85px)] w-full">
@@ -39,8 +43,13 @@ const Workspace = ({ params }: { params: Promise<{ id: string }> }) => {
         <PanelResizeHandle className="w-1 cursor-col-resize bg-gray-300 hover:bg-gray-400" />
         <Panel defaultSize={60} minSize={30} className="bg-red-50 p-4">
           <div className="relative">
-            <TextEditor content={attempt} onChange={onChange}/>
-            <Button className="absolute right-0 mt-2 cursor-pointer" onClick={submitArticle}>Submit</Button>
+            <TextEditor content={attempt} onChange={onChange} />
+            <Button
+              className="absolute right-0 mt-2 cursor-pointer"
+              onClick={submitArticle}
+            >
+              Submit
+            </Button>
           </div>
         </Panel>
       </PanelGroup>
