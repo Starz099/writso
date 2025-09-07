@@ -1,10 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
-const prisma = new PrismaClient();
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-// import { authOptions } from "../../api/auth/[...nextauth]"; // Your NextAuth.js configuration
 
-export async function GET(req: NextRequest, res: NextResponse) {
+const prisma = new PrismaClient();
+
+export async function GET(): Promise<NextResponse> {
   try {
     const session = await getServerSession();
     console.log("Session in api", session);
@@ -12,14 +12,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    // const userId = (await prisma.user.findFirst())?.id;
 
-    // const userId = "cmevcp2ge0000uvgkrrilmvuu";
     const userId = (
       await prisma.user.findFirst({
         where: { email: session?.user?.email },
       })
     )?.id;
+
     if (!userId) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
@@ -30,8 +29,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
       },
     });
 
-    return NextResponse.json(articles, { status: 200 });
+    return NextResponse.json({ articles }, { status: 200 });
   } catch (e) {
     console.error(`Error while fetching articles in api`, e);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

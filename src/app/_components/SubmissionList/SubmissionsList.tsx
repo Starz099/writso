@@ -9,7 +9,7 @@ const SubmissionsList = () => {
     async function fetchSubmissions() {
       const res = (await axios.get("/api/article")).data;
       //@ts-expect-error how to fix type of res
-      setSubmissions(res);
+      setSubmissions(res.articles);
     }
     fetchSubmissions();
   }, []);
