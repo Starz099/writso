@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import { DailyStatement } from "./DailyStatement";
+import SubmissionsList from "../SubmissionList/SubmissionsList";
 
 const Dashboard = () => {
   const { data: session } = useSession();
@@ -9,6 +10,7 @@ const Dashboard = () => {
         Hi {session?.user?.name}, ready to sharpen your writing today?
       </h1>
       <DailyStatement />
+      <SubmissionsList />
     </div>
   );
 };

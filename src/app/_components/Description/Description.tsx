@@ -13,7 +13,7 @@ const Description = ({ statementId }: DescriptionProps) => {
     const fetchStatement = async () => {
       try {
         const response = await axios.get<ArticleStatement>(
-          `/api/article/${statementId}`,
+          `/api/article_statement/${statementId}`,
         );
         setStatement(response.data);
       } catch (error) {

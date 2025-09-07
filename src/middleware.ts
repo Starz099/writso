@@ -1,13 +1,13 @@
-import { withAuth } from "next-auth/middleware"
+import { withAuth } from "next-auth/middleware";
 
 export default withAuth({
   callbacks: {
     authorized: ({ token }) => {
-      return !!token
+      return !!token;
     },
   },
-})
+});
 
 export const config = {
-  matcher: ["/api/article/:path*", "/dashboard"],
-}
+  matcher: ["/api/article/:path*", "/dashboard", "/api/article"],
+};
