@@ -1,6 +1,8 @@
+"use client"
+
 import { useSession } from "next-auth/react";
-import { DailyStatement } from "./DailyStatement";
-import SubmissionsList from "../SubmissionList/SubmissionsList";
+import { DailyStatement } from "../_components/Home/DailyStatement";
+import SubmissionsList from "../_components/SubmissionList/SubmissionsList";
 
 const Dashboard = () => {
   const { data: session } = useSession();
