@@ -17,13 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={`antialiased`}>
-        <Providers>
-          <div className="relative flex min-h-screen flex-col">
+        <div className="relative flex min-h-screen flex-col">
+          <Providers>
             <Navbar />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
-        </Providers>
+          </Providers>
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </div>
       </body>
     </html>
   );
