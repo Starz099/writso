@@ -11,19 +11,23 @@ const Workspace = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params);
   const [attempt, setAttempt] = useState("");
   const { data: session } = useSession();
-  console.log("session in Workspace", session);
 
   const onChange = (content: string) => {
     setAttempt(content);
   };
 
   const submitArticle = async () => {
-    console.log("Submitting article", {
-      id,
-      attempt,
-      userEmail: session?.user?.email,
-    });
+    // console.log("Submitting article", {
+    //   id,
+    //   attempt,
+    //   userEmail: session?.user?.email,
+    // });
     try {
+      if (!session) {
+        alert("You must be logged in to submit an article");
+        return;
+      }
+
       await axios.post(`/api/article/${id}`, {
         content: attempt,
         userEmail: session?.user?.email as string,

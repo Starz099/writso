@@ -6,12 +6,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body suppressHydrationWarning={true} className={`antialiased`}>
-        <Providers>
-          <div className="flex-1">{children}</div>
-        </Providers>
-      </body>
-    </html>
+    <Providers>
+      <div className="flex-1">{children}</div>
+    </Providers>
   );
 }

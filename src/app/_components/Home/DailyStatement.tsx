@@ -15,7 +15,11 @@ export const DailyStatement = async () => {
   let statement = null;
 
   try {
-    statement = (await axios.get<ArticleStatement>(`${process.env.NEXT_PUBLIC_APP_URL}/api/daily`)).data;
+    statement = (
+      await axios.get<ArticleStatement>(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/daily`,
+      )
+    ).data;
   } catch (e) {
     console.log("error fetching daily statement", e);
   }
