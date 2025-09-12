@@ -3,10 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function GET() {
   return NextResponse.json({ message: "Get method in article route" });
 }
 

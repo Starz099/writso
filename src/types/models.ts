@@ -19,3 +19,8 @@ export interface ArticleStatement {
   articles?: Article[];
   createdAt: Date;
 }
+
+export interface CreateArticleResponse {
+  message: string;
+  article: Article;
+}

@@ -1,15 +1,16 @@
-"use client";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Article } from "@/types";
+'use client';
+import { useEffect, useState } from 'react';
+import { Article } from '@/types';
+import { getArticles } from '@/core/api';
 
 const SubmissionsList = () => {
   const [submissions, setSubmissions] = useState<Article[]>([]);
   useEffect(() => {
     async function fetchSubmissions() {
-      const res = (await axios.get("/api/article")).data;
-      //@ts-expect-error how to fix type of res
-      setSubmissions(res.articles);
+      const res = await getArticles();
+      if (res) {
+        setSubmissions(res);
+      }
     }
     fetchSubmissions();
   }, []);

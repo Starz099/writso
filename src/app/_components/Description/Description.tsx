@@ -1,21 +1,19 @@
 import { ArticleStatement } from "@/types";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { getArticleStatement } from "@/core/api";
 
 interface DescriptionProps {
   statementId: string;
 }
 
 const Description = ({ statementId }: DescriptionProps) => {
-  const [statement, setStatement] = useState<ArticleStatement>();
+  const [statement, setStatement] = useState<ArticleStatement | null>();
 
   useEffect(() => {
     const fetchStatement = async () => {
       try {
-        const response = await axios.get<ArticleStatement>(
-          `/api/article_statement/${statementId}`,
-        );
-        setStatement(response.data);
+        const response = await getArticleStatement(statementId);
+        setStatement(response);
       } catch (error) {
         console.error("Failed to fetch daily statement:", error);
       }

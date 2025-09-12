@@ -2,7 +2,8 @@
 import Description from "@/app/_components/Description/Description";
 import TextEditor from "@/app/_components/TextEditor/TextEditor";
 import { Button } from "@/app/_components/ui/button";
-import axios from "axios";
+import { createArticle } from "@/core/api";
+
 import { useSession } from "next-auth/react";
 import { use, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
@@ -23,15 +24,12 @@ const Workspace = ({ params }: { params: Promise<{ id: string }> }) => {
     //   userEmail: session?.user?.email,
     // });
     try {
-      if (!session) {
+      if (!session?.user?.email) {
         alert("You must be logged in to submit an article");
         return;
       }
 
-      await axios.post(`/api/article/${id}`, {
-        content: attempt,
-        userEmail: session?.user?.email as string,
-      });
+      await createArticle(attempt, id, session.user.email);
       alert("Article submitted successfully");
     } catch (e) {
       console.error("Error while submitting article", e);

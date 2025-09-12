@@ -8,18 +8,13 @@ import {
   CardTitle,
 } from "../ui/card";
 import type { ArticleStatement } from "@/types";
-import axios from "axios";
-import { env } from "process";
+import { getDailyStatement } from "@/core/api";
 
 export const DailyStatement = async () => {
-  let statement = null;
+  let statement: ArticleStatement | null = null;
 
   try {
-    statement = (
-      await axios.get<ArticleStatement>(
-        `${process.env.NEXT_PUBLIC_APP_URL}/api/daily`,
-      )
-    ).data;
+    statement = await getDailyStatement();
   } catch (e) {
     console.log("error fetching daily statement", e);
   }
