@@ -8,25 +8,17 @@ import {
   CardTitle,
 } from "../ui/card";
 import type { ArticleStatement } from "@/types";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { env } from "process";
 
-export const DailyStatement = () => {
-  const [statement, setStatement] = useState<ArticleStatement>();
+export const DailyStatement = async () => {
+  let statement = null;
 
-  useEffect(() => {
-    const fetchDailyStatement = async () => {
-      try {
-        const response = await axios.get<ArticleStatement>(
-          "/api/daily", // Use relative path for API routes
-        );
-        setStatement(response.data);
-      } catch (error) {
-        console.error("Failed to fetch daily statement:", error);
-      }
-    };
-    fetchDailyStatement();
-  }, []);
+  try {
+    statement = (await axios.get<ArticleStatement>(`${process.env.NEXT_PUBLIC_APP_URL}/api/daily`)).data;
+  } catch (e) {
+    console.log("error fetching daily statement", e);
+  }
 
   if (!statement) {
     return (

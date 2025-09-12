@@ -9,5 +9,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ["/api/article/:path*", "/dashboard", "/api/article"],
+  matcher: [],
 };
