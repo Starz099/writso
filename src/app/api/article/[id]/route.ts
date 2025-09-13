@@ -32,7 +32,7 @@ export async function POST(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    await prisma.article.create({
+    const article = await prisma.article.create({
       data: {
         title: "untitled",
         userId: userId,
@@ -42,7 +42,7 @@ export async function POST(
     });
 
     return NextResponse.json(
-      { message: "Article submitted successfully" },
+      { message: "Article submitted successfully", id: article.id },
       { status: 200 },
     );
   } catch (e) {

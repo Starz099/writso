@@ -22,5 +22,5 @@ export interface ArticleStatement {
 
 export interface CreateArticleResponse {
   message: string;
-  article: Article;
+  id: string;
 }

@@ -6,7 +6,7 @@ import { createArticle } from "@/core/api";
 
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { use, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
@@ -14,7 +14,7 @@ const Workspace = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params);
   const [attempt, setAttempt] = useState("");
   const { data: session } = useSession();
-  // const router = useRouter();
+  const router = useRouter();
   const currentPath = process.env.NEXT_PUBLIC_APP_URL + usePathname();
   const onChange = (content: string) => {
     setAttempt(content);
@@ -32,10 +32,11 @@ const Workspace = ({ params }: { params: Promise<{ id: string }> }) => {
         return;
       }
 
-      const ress = await createArticle(attempt, id, session.user.email);
-      console.log(ress);
+      const article = await createArticle(attempt, id, session.user.email);
+
+      console.log(article);
       alert("Article submitted successfully");
-      // router.push(currentPath);
+      router.push(currentPath + "/" + article?.id);
     } catch (e) {
       console.error("Error while submitting article", e);
     }
