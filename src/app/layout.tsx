@@ -6,7 +6,7 @@ import Footer from "@/app/_components/Footer/footer";
 
 export const metadata: Metadata = {
   title: "Writso",
-  description: "",
+  description: "it is a platform to practice writing.",
 };
 
 export default function RootLayout({

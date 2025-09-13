@@ -34,7 +34,9 @@ export const getArticleStatement = async (
 
 export const getArticles = async (): Promise<Article[] | null> => {
   try {
-    const response = await apiClient.get<{ articles: Article[] }>("/api/article");
+    const response = await apiClient.get<{ articles: Article[] }>(
+      "/api/article",
+    );
     return response.data.articles;
   } catch (error) {
     console.error("Failed to fetch articles:", error);
@@ -54,6 +56,20 @@ export const createArticle = async (
         content,
         userEmail,
       },
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to create article:", error);
+    return null;
+  }
+};
+
+export const getSubmissionById = async (
+  submissionId: string,
+): Promise<Article | null> => {
+  try {
+    const response = await apiClient.get<Article>(
+      `/api/submission/${submissionId}`,
     );
     return response.data;
   } catch (error) {

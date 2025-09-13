@@ -1,7 +1,7 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { Article } from '@/types';
-import { getArticles } from '@/core/api';
+"use client";
+import { useEffect, useState } from "react";
+import { Article } from "@/types";
+import { getArticles } from "@/core/api";
 
 const SubmissionsList = () => {
   const [submissions, setSubmissions] = useState<Article[]>([]);
