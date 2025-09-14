@@ -8,6 +8,7 @@ export interface Article {
   content: string;
   userId: string;
   statementId?: string | null;
+  score: number;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Article } from "@/types";
 import { getArticles } from "@/core/api";
+import Link from "next/link";
 
 const SubmissionsList = () => {
   const [submissions, setSubmissions] = useState<Article[]>([]);
@@ -9,7 +10,7 @@ const SubmissionsList = () => {
     async function fetchSubmissions() {
       const res = await getArticles();
       if (res) {
-        setSubmissions(res);
+        setSubmissions(res.reverse());
       }
     }
     fetchSubmissions();
@@ -23,8 +24,19 @@ const SubmissionsList = () => {
           submissions.map((item) => {
             return (
               <li key={item.id} className="rounded-md border p-4">
-                <h1 className="text-xl font-semibold">{item.title}</h1>
-                <h2 className="text-xl font-semibold">{item.content}</h2>
+                <Link
+                  href={
+                    process.env.NEXT_PUBLIC_APP_URL +
+                    "/articles/" +
+                    item.statementId +
+                    "/" +
+                    item.id
+                  }
+                >
+                  <h1 className="text-xl font-semibold">{item.title}</h1>
+                  <h2 className="text-xl font-semibold">Score: {item.score}</h2>
+                  <h2 className="text-xl font-semibold">{item.content}</h2>
+                </Link>
               </li>
             );
           })}

@@ -71,6 +71,7 @@ model Article {
   userId      String
   statement   ArticleStatement? @relation(fields: [statementId], references: [id])
   statementId String? // optional (null for freestyle writing)
+  score       Int
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 }

@@ -38,6 +38,7 @@ export async function POST(
         userId: userId,
         content: content,
         statementId: id,
+        score: 10, // TODO: Implement actual score calculation
       },
     });
 

@@ -4,10 +4,9 @@ import { getServerSession } from "next-auth";
 
 const prisma = new PrismaClient();
 
-export async function GET(): Promise<NextResponse> {
+export async function GET() {
   try {
     const session = await getServerSession();
-    console.log("Session in api", session);
 
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
