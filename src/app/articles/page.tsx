@@ -1,18 +1,31 @@
+"use client";
 import { getAllArticleStatements } from "@/core/api";
+import { ArticleStatement } from "@prisma/client";
 import Link from "next/link";
 
-const page = async () => {
-  let statements = null;
-  try {
-    statements = await getAllArticleStatements();
-  } catch (e) {
-    console.log("error while fetching all statements in frontend", e);
-  }
+import { useEffect, useState } from "react";
 
-  if (!statements) {
-    return <div>an error occured while fetching all statements</div>;
-  }
+const Page = () => {
+  const [statements, setStatements] = useState<ArticleStatement[] | null>([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getAllArticleStatements();
+        setStatements(result);
+      } catch (e) {
+        console.error("Client-side error:", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (!statements) return <div>No statements</div>;
   return (
     <div className="mt-5 px-10">
       {statements.map((item) => {
@@ -29,4 +42,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;
