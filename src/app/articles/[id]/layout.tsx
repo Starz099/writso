@@ -1,13 +1,11 @@
-import { Providers } from "@/app/providers";
+import { ReactNode } from "react";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <Providers>
-      <div className="flex-1">{children}</div>
-    </Providers>
-  );
+interface ArticleLayoutProps {
+  children: ReactNode;
 }
+
+const ArticleLayout = ({ children }: ArticleLayoutProps) => {
+  return <div>{children}</div>;
+};
+
+export default ArticleLayout;
