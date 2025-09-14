@@ -26,7 +26,7 @@ const Description = async ({ statementId }: DescriptionProps) => {
     const response = await getArticleStatement(statementId);
     statement = response;
   } catch (e) {
-    console.error("error occured while fetching article statement");
+    console.error("error occured while fetching article statement", e);
   }
 
   if(!statement) return (
