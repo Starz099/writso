@@ -23,6 +23,7 @@ const SubmissionsList = () => {
           submissions.map((item) => {
             return (
               <li key={item.id} className="rounded-md border p-4">
+                <h1 className="text-xl font-semibold">{item.title}</h1>
                 <h2 className="text-xl font-semibold">{item.content}</h2>
               </li>
             );

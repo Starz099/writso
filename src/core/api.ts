@@ -45,6 +45,7 @@ export const getArticles = async (): Promise<Article[] | null> => {
 };
 
 export const createArticle = async (
+  title: string,
   content: string,
   statementId: string,
   userEmail: string,
@@ -53,6 +54,7 @@ export const createArticle = async (
     const response = await apiClient.post<CreateArticleResponse>(
       `/api/article/${statementId}`,
       {
+        title,
         content,
         userEmail,
       },

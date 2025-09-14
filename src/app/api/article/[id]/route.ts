@@ -19,7 +19,7 @@ export async function POST(
   }
 
   try {
-    const { content, userEmail } = await request.json();
+    const { title, content, userEmail } = await request.json();
 
     const userId = (
       await prisma.user.findFirst({
@@ -34,7 +34,7 @@ export async function POST(
 
     const article = await prisma.article.create({
       data: {
-        title: "untitled",
+        title: title,
         userId: userId,
         content: content,
         statementId: id,

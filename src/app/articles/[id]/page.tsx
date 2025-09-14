@@ -1,9 +1,11 @@
 import Description from "@/app/_components/Description/Description";
 import Workspace from "./workspace";
 
-export default async function ArticlePage({ params }: { params: Promise<{ id: string }> }) {
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
-  return (
-    <Workspace description={<Description statementId={id} />} id={id} />
-  );
+  return <Workspace description={<Description statementId={id} />} id={id} />;
 }

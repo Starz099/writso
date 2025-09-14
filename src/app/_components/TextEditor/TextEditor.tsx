@@ -17,7 +17,7 @@ const TextEditor = ({ content, onChange }: TextEditorProps) => {
     editorProps: {
       attributes: {
         class:
-          "bg-teal-100 p-2 border-2 h-145 rounded-xl overflow-scroll focus:outline-none",
+          "bg-teal-100 p-2 border-4 h-135 rounded-xl overflow-scroll focus:outline-none",
       },
     },
     onUpdate: ({ editor }) => {

@@ -29,11 +29,7 @@ const Description = async ({ statementId }: DescriptionProps) => {
     console.error("error occured while fetching article statement", e);
   }
 
-  if(!statement) return (
-    <div>
-      Error occured while fetching statement
-    </div>
-  )
+  if (!statement) return <div>Error occured while fetching statement</div>;
 
   return (
     <div>
