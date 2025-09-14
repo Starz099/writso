@@ -79,3 +79,18 @@ export const getSubmissionById = async (
     return null;
   }
 };
+
+export const getAllArticleStatements = async (): Promise<
+  ArticleStatement[] | null
+> => {
+  try {
+    const response = await apiClient.get<{
+      message: string;
+      statements: ArticleStatement[];
+    }>("/api/article_statement");
+    return response.data.statements;
+  } catch (error) {
+    console.error("Failed to all article statements:", error);
+    return null;
+  }
+};

@@ -17,8 +17,13 @@ const Navbar = () => {
 
   return (
     <div className="flex w-full items-center justify-between rounded-full border-b-2 border-fuchsia-800 px-6 py-2">
-      <div className="font-mono text-2xl font-bold">
-        <Link href="/">Writso</Link>
+      <div className="flex items-center gap-6">
+        <div className="font-mono text-2xl font-bold">
+          <Link href="/">Writso</Link>
+        </div>
+        <Link href="/articles" className="underline">
+          Articles
+        </Link>
       </div>
       {session ? (
         <DropdownMenu>
