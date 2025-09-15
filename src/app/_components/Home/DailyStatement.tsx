@@ -7,8 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { Badge } from "../ui/badge";
 import type { ArticleStatement } from "@/types";
 import { getDailyStatement } from "@/core/api";
+import { Calendar, PenTool, Sparkles } from "lucide-react";
 
 export const DailyStatement = async () => {
   let statement: ArticleStatement | null = null;
@@ -21,30 +23,71 @@ export const DailyStatement = async () => {
 
   if (!statement) {
     return (
-      <Card className="my-6 w-2/3 animate-pulse bg-gray-200 p-6">
-        <CardTitle className="h-8 w-1/2 rounded bg-gray-300 font-serif text-2xl font-bold"></CardTitle>
-        <CardHeader className="mt-2 h-6 w-3/4 rounded bg-gray-300"></CardHeader>
-        <CardContent className="mt-2 h-4 w-full rounded bg-gray-300"></CardContent>
-        <CardFooter className="mt-4">
-          <div className="ml-auto h-12 w-32 rounded bg-gray-300"></div>
+      <Card className="from-primary/5 via-background to-accent/5 hover-lift relative overflow-hidden border-0 bg-gradient-to-br shadow-lg">
+        <CardHeader className="pb-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="bg-muted h-8 w-24 animate-pulse rounded" />
+            </div>
+            <div className="bg-muted h-6 w-16 animate-pulse rounded-full" />
+          </div>
+          <div className="bg-muted h-8 w-3/4 animate-pulse rounded" />
+        </CardHeader>
+        <CardContent className="pb-6">
+          <div className="space-y-2">
+            <div className="bg-muted h-4 w-full animate-pulse rounded" />
+            <div className="bg-muted h-4 w-5/6 animate-pulse rounded" />
+            <div className="bg-muted h-4 w-4/6 animate-pulse rounded" />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <div className="bg-muted h-10 w-32 animate-pulse rounded" />
         </CardFooter>
       </Card>
     );
   }
 
   return (
-    <Card className="my-6 w-2/3 bg-emerald-300 p-6">
-      <CardTitle className="font-serif text-2xl font-bold">
-        TOPIC OF THE DAY :
-      </CardTitle>
-      <CardHeader>{statement?.title}</CardHeader>
-      <CardContent>{statement?.prompt}</CardContent>
-      <CardFooter>
-        <Link href={`/articles/${statement?.id}`} className="ml-auto">
-          <Button className="cursor-pointer" size="lg">
+    <Card className="from-primary/5 via-background to-accent/5 hover-lift group relative overflow-hidden border-0 bg-gradient-to-br shadow-lg">
+      {/* Decorative elements */}
+      <div className="absolute top-4 right-4 opacity-10 transition-opacity group-hover:opacity-20">
+        <Sparkles className="text-primary h-8 w-8" />
+      </div>
+
+      <CardHeader className="pb-4">
+        <div className="mb-2 flex items-center justify-between">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
+            <Calendar className="h-4 w-4" />
+            <span>Daily Challenge</span>
+          </div>
+          <Badge
+            variant="secondary"
+            className="bg-primary/10 text-primary border-0"
+          >
+            Today
+          </Badge>
+        </div>
+        <CardTitle className="from-foreground to-primary bg-gradient-to-r bg-clip-text text-2xl font-bold text-transparent">
+          {statement?.title}
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent className="pb-6">
+        <p className="text-muted-foreground leading-relaxed">
+          {statement?.prompt}
+        </p>
+      </CardContent>
+
+      <CardFooter className="pt-0">
+        <Button asChild size="lg" className="group/btn hover-lift">
+          <Link
+            href={`/articles/${statement?.id}`}
+            className="flex items-center gap-2"
+          >
+            <PenTool className="h-4 w-4 transition-transform group-hover/btn:rotate-12" />
             Start Writing
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </CardFooter>
     </Card>
   );

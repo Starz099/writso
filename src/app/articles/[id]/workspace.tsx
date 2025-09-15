@@ -51,7 +51,7 @@ export default function Workspace({
       <PanelGroup direction="horizontal">
         <Panel defaultSize={40} minSize={30} className="p-6">
           {description}
-          <Interactions statementId = {id} />
+          <Interactions statementId={id} />
         </Panel>
         <PanelResizeHandle className="w-1 cursor-col-resize bg-gray-300 hover:bg-gray-400" />
         <Panel defaultSize={60} minSize={30} className="bg-red-50 p-4">

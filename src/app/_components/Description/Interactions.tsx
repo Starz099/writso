@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "../ui/button";
 
 const Interactions = ({ statementId }: { statementId: string }) => {
   return (
-    <div className="flex py-4 gap-2">
+    <div className="flex gap-2 py-4">
       <Link
         href={`/articles/${statementId}/all-submissions`}
         className="rounded-4xl bg-teal-100 p-2"

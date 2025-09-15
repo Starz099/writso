@@ -1,7 +1,5 @@
 import { ArticleStatement } from "@/types";
 import { getArticleStatement } from "@/core/api";
-import Link from "next/link";
-import Interactions from "./Interactions";
 
 interface DescriptionProps {
   statementId: string;
