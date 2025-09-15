@@ -9,6 +9,9 @@ export interface Article {
   userId: string;
   statementId?: string | null;
   score: number;
+  isPublic: boolean;
+  upVotes: number;
+  downVotes: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -18,6 +21,8 @@ export interface ArticleStatement {
   title: string;
   prompt: string;
   articles?: Article[];
+  upVotes: number;
+  downVotes: number;
   createdAt: Date;
 }
 

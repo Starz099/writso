@@ -60,6 +60,8 @@ model ArticleStatement {
   title     String
   prompt    String // statement or detailed description
   articles  Article[] // all articles linked to this statement
+  upVotes   Int       @default(0)
+  downVotes Int       @default(0)
   createdAt DateTime  @default(now())
 }
 
@@ -72,6 +74,9 @@ model Article {
   statement   ArticleStatement? @relation(fields: [statementId], references: [id])
   statementId String? // optional (null for freestyle writing)
   score       Int
+  isPublic    Boolean           @default(false)
+  upVotes     Int?              @default(0)
+  downVotes   Int?              @default(0)
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 }
