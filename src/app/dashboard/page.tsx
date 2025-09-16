@@ -1,10 +1,10 @@
-import { DailyStatement } from "../_components/Home/DailyStatement";
-import SubmissionsList from "../_components/SubmissionList/SubmissionsList";
-import { Container } from "../_components/ui/container";
-import { Section } from "../_components/ui/section";
-import { Button } from "../_components/ui/button";
+import { DailyStatement } from "@/components/features/dashboard/DailyStatement";
+import SubmissionsList from "@/components/features/dashboard/SubmissionsList";
+import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
+import { Button } from "@/components/ui/button";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/core/auth";
+import { authOptions } from "@/lib/auth";
 import { PenTool, BookOpen } from "lucide-react";
 import Link from "next/link";
 

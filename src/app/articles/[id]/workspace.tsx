@@ -1,10 +1,10 @@
 "use client";
 
-import Interactions from "@/app/_components/Description/Interactions";
-import TextEditor from "@/app/_components/TextEditor/TextEditor";
-import { Button } from "@/app/_components/ui/button";
-import { Input } from "@/app/_components/ui/input";
-import { createArticle } from "@/core/api";
+import Interactions from "@/components/features/articles/Interactions";
+import TextEditor from "@/components/features/editor/TextEditor";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { createArticle } from "@/lib/api";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";

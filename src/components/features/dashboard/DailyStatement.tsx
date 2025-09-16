@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Badge } from "../ui/badge";
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import type { ArticleStatement } from "@/types";
-import { getDailyStatement } from "@/core/api";
+import { getDailyStatement } from "@/lib/api";
 import { Calendar, PenTool, Sparkles } from "lucide-react";
 
 export const DailyStatement = async () => {

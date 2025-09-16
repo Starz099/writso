@@ -1,6 +1,6 @@
-import { Button } from "@/app/_components/ui/button";
-import { Container } from "@/app/_components/ui/container";
-import { Section } from "@/app/_components/ui/section";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Users, BookOpen } from "lucide-react";
 
