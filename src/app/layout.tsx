@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
-import Navbar from "@/app/_components/Navbar/navbar";
-import Footer from "@/app/_components/Footer/footer";
+import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
 
 export const metadata: Metadata = {
   title: "Writso",

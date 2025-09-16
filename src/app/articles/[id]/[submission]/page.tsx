@@ -1,5 +1,5 @@
-import ShareSubmissionButton from "@/app/_components/ui/share-submission-button";
-import { getSubmissionById } from "@/core/api";
+import ShareSubmissionButton from "@/components/ui/share-submission-button";
+import { getSubmissionById } from "@/lib/api";
 
 const page = async ({
   params,

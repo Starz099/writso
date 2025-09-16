@@ -1,5 +1,5 @@
 "use client";
-import { getAllArticleStatements } from "@/core/api";
+import { getAllArticleStatements } from "@/lib/api";
 import { ArticleStatement } from "@prisma/client";
 import Link from "next/link";
 

@@ -1,6 +1,5 @@
-import { Container } from "../ui/container";
+import { Container } from "@/components/ui/container";
 import { PenTool, Heart } from "lucide-react";
-
 const Footer = () => {
   return (
     <footer className="bg-muted/30 mt-auto border-t">

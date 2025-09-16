@@ -1,5 +1,5 @@
 import { ArticleStatement } from "@/types";
-import { getArticleStatement } from "@/core/api";
+import { getArticleStatement } from "@/lib/api";
 
 interface DescriptionProps {
   statementId: string;

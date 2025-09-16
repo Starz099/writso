@@ -25,8 +25,3 @@ export interface ArticleStatement {
   downVotes: number;
   createdAt: Date;
 }
-
-export interface CreateArticleResponse {
-  message: string;
-  id: string;
-}

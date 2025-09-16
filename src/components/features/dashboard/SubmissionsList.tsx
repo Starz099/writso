@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Article } from "@/types";
-import { getArticles } from "@/core/api";
+import { getArticles } from "@/lib/api";
 import Link from "next/link";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Badge } from "../ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { FileText, TrendingUp, Clock } from "lucide-react";
 
 const SubmissionsList = () => {

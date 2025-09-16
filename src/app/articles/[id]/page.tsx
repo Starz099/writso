@@ -1,4 +1,4 @@
-import Description from "@/app/_components/Description/Description";
+import Description from "@/components/features/articles/Description";
 import Workspace from "./workspace";
 
 export default async function ArticlePage({
