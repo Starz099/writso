@@ -11,9 +11,11 @@ const ShareSubmissionButton = () => {
     navigator.clipboard.writeText(link);
   };
   return (
-    <Button onClick={copyLink} className="w-1/4 cursor-pointer">
-      Share Link
-    </Button>
+    <>
+      <Button onClick={copyLink} className="w-1/4 cursor-pointer">
+        Share Link
+      </Button>
+    </>
   );
 };
 

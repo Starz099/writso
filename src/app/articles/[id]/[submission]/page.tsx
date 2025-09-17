@@ -1,3 +1,4 @@
+import CommentBox from "@/components/ui/comment-box";
 import ShareSubmissionButton from "@/components/ui/share-submission-button";
 import { getSubmissionById } from "@/lib/api";
 
@@ -15,6 +16,7 @@ const page = async ({
       <ShareSubmissionButton />
       <br />
       {JSON.stringify(submissionData)}
+      <CommentBox submissionId={submission} />
     </div>
   );
 };
