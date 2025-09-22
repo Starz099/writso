@@ -16,6 +16,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   articles      Article[]
+  comments      Comment[]
   createdAt     DateTime  @default(now())
 }
 
@@ -79,4 +80,19 @@ model Article {
   downVotes   Int?              @default(0)
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
+  comments    Comment[]
+}
+
+model Comment {
+  id              String    @id @default(cuid())
+  content         String
+  author          User      @relation(fields: [authorId], references: [id])
+  authorId        String
+  article         Article   @relation(fields: [articleId], references: [id])
+  articleId       String
+  parentComment   Comment?  @relation("replies", fields: [parentCommentId], references: [id])
+  parentCommentId String?
+  replies         Comment[] @relation("replies")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }
