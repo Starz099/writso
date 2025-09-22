@@ -4,6 +4,7 @@ import { Input } from "./input";
 import { Button } from "./button";
 import axios from "axios";
 import { User } from "@prisma/client";
+import CommentUi from "./comment";
 
 interface Comment {
   id: string;
@@ -11,6 +12,7 @@ interface Comment {
   author: User;
   authorId: string;
   parentCommentId?: string;
+  replies: Comment[];
 }
 
 const CommentBox = (props: { submissionId: string }) => {
@@ -59,10 +61,7 @@ const CommentBox = (props: { submissionId: string }) => {
               key={key}
               className="mb-3 rounded-lg border border-purple-200 bg-white p-4 shadow-sm"
             >
-              <p className="text-gray-800">{comment.content}</p>
-              <span className="mt-2 block text-sm text-gray-500">
-                — {comment.author.name}
-              </span>
+              <CommentUi comment={comment} />
             </div>
           );
         })}
@@ -70,4 +69,5 @@ const CommentBox = (props: { submissionId: string }) => {
     </div>
   );
 };
+
 export default CommentBox;

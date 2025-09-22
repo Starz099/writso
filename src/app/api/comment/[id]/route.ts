@@ -31,29 +31,19 @@ export async function GET(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    const comments = await prisma.comment.findMany({
+    const replies = await prisma.comment.findMany({
       where: {
-        articleId: id,
-      },
-      include: {
-        author: {
-          select: {
-            id: true,
-            name: true, // username field from User
-            email: true, // you can include more if needed
-          },
-        },
+        parentCommentId: id,
       },
     });
 
     return NextResponse.json({
-      comments,
-      message: `Comments fetched for article id ${id}`,
-
+      replies,
+      message: `Comments fetched for comment id ${id}`,
       status: 200,
     });
   } catch (e) {
-    console.error(`Error while fetching articles in api`, e);
+    console.error(`Error while fetching comment in api`, e);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
@@ -88,13 +78,13 @@ export async function POST(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    const articleId = id;
+    const commentId = id;
     const { content } = await request.json();
 
     const comment = await prisma.comment.create({
       data: {
         content,
-        articleId,
+        parentCommentId: commentId,
         authorId: userId,
       },
     });

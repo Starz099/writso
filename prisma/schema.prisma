@@ -88,8 +88,8 @@ model Comment {
   content         String
   author          User      @relation(fields: [authorId], references: [id])
   authorId        String
-  article         Article   @relation(fields: [articleId], references: [id])
-  articleId       String
+  article         Article?   @relation(fields: [articleId], references: [id])
+  articleId       String?
   parentComment   Comment?  @relation("replies", fields: [parentCommentId], references: [id])
   parentCommentId String?
   replies         Comment[] @relation("replies")
