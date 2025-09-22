@@ -35,6 +35,16 @@ export async function GET(
       where: {
         parentCommentId: id,
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json({
