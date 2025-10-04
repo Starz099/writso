@@ -1,13 +1,11 @@
+import { authOptions } from "@/lib/auth";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET() {
-  return NextResponse.json({ message: "Get method in article/id route" });
-}
-
-export async function POST(
+export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
@@ -18,11 +16,15 @@ export async function POST(
   }
 
   try {
-    const { title, content, userEmail } = await request.json();
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
     const userId = (
       await prisma.user.findFirst({
-        where: { email: userEmail },
+        where: { email: session?.user?.email },
       })
     )?.id;
 
@@ -30,24 +32,23 @@ export async function POST(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    const article = await prisma.article.create({
-      data: {
-        title: title,
+    const submissions = await prisma.article.findMany({
+      where: {
         userId: userId,
-        content: content,
         statementId: id,
-        score: 10, // TODO: Implement actual score calculation
       },
     });
 
-    return NextResponse.json(
-      { message: "Article submitted successfully", id: article.id },
-      { status: 200 },
-    );
+    return NextResponse.json({
+      submissions,
+      message: `articles fetched for article id ${id}`,
+
+      status: 200,
+    });
   } catch (e) {
-    console.error(`Error while posting article in api`, e);
+    console.error(`Error while fetching articles in api`, e);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Internal server error" },
       { status: 500 },
     );
   }
