@@ -10,12 +10,22 @@ const page = async ({
   const { submission } = await params;
 
   const submissionData = await getSubmissionById(submission);
+  const title = submissionData?.title;
+  const content = submissionData?.content;
+  const authorName = submissionData?.user?.name;
 
+  console.log(submissionData);
   return (
     <div className="mt-8 flex w-svw flex-col items-center justify-center px-10">
       <ShareSubmissionButton />
       <br />
-      {JSON.stringify(submissionData)}
+      <div className="border-b-2 text-4xl">{title}</div>
+      <br />
+      <div className="text-2xl">
+        <div dangerouslySetInnerHTML={{ __html: content as string }} />-
+        {authorName}
+      </div>
+      <br />
       <CommentBox submissionId={submission} />
     </div>
   );
