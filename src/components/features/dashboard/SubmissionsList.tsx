@@ -126,9 +126,12 @@ const SubmissionsList = () => {
                   </CardHeader>
 
                   <CardContent>
-                    <p className="text-muted-foreground line-clamp-2 leading-relaxed">
-                      {item.content}
-                    </p>
+                    <p
+                      className="text-muted-foreground line-clamp-2 leading-relaxed"
+                      dangerouslySetInnerHTML={{
+                        __html: item.content as string,
+                      }}
+                    ></p>
                   </CardContent>
                 </Link>
               </Card>

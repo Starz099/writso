@@ -17,6 +17,15 @@ export async function GET(
   try {
     const submission = await prisma.article.findUnique({
       where: { id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
     });
 
     if (!submission) {

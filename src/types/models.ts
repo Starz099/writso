@@ -2,10 +2,13 @@
 // the generated types from Prisma, like `import type { Article } from '@prisma/client';`
 // These interfaces are useful for defining custom object shapes, API responses, etc.
 
+import { User } from "@prisma/client";
+
 export interface Article {
   id: string;
   title: string;
   content: string;
+  user?: User;
   userId: string;
   statementId?: string | null;
   score: number;
