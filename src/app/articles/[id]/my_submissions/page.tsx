@@ -13,8 +13,17 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const Page = ({ params }: { params: { id: string } }) => {
+const Page = ({ params }: { params: Promise<{ id: string }> }) => {
   const [submissions, setSubmissions] = useState<Article[]>([]);
+  const [articleId, setArticleId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const resolveParams = async () => {
+      const resolved = await params;
+      setArticleId(resolved.id);
+    };
+    resolveParams();
+  }, [params]);
 
   const getAllSubmissions = async (id: string) => {
     const res = (
@@ -27,20 +36,26 @@ const Page = ({ params }: { params: { id: string } }) => {
   };
 
   useEffect(() => {
-    const fn = async () => {
-      setSubmissions((await getAllSubmissions(params.id)).reverse());
-    };
-    fn();
-  }, [params.id]);
+    if (articleId) {
+      const fn = async () => {
+        setSubmissions((await getAllSubmissions(articleId)).reverse());
+      };
+      fn();
+    }
+  }, [articleId]);
+
+  if (!articleId) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
       <Container>
-        <h1 className="mb-4 text-3xl font-bold">All Submissions</h1>
+        <h1 className="mb-4 text-3xl font-bold">My Submissions</h1>
         <div className="flex flex-col gap-4">
           {submissions.map((submission) => (
             <Link
-              href={`/articles/${params.id}/${submission.id}`}
+              href={`/articles/${articleId}/${submission.id}`}
               key={submission.id}
             >
               <Card className="cursor-pointer transition-shadow duration-200 hover:shadow-lg">
