@@ -1,3 +1,4 @@
+import calc from "@/lib/calculateScore";
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -30,13 +31,15 @@ export async function POST(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    const score = await calc(content as string);
+
     const article = await prisma.article.create({
       data: {
         title: title,
         userId: userId,
         content: content,
         statementId: id,
-        score: 10, // TODO: Implement actual score calculation
+        score: score,
       },
     });
 
