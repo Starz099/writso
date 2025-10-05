@@ -54,7 +54,7 @@ export function calculateWritingScore(
   // Weighted Final Score
   const finalScore =
     grammarScore * 0.4 + readabilityScore * 0.4 + structureScore * 0.2;
-  console.log(Math.round(finalScore));
+  // console.log(Math.round(finalScore));
   return Math.round(finalScore);
 }
 
@@ -67,7 +67,7 @@ const calc = async (content: string): Promise<number> => {
   const readabilityRes = (
     await axios.post("https://api.apiverve.com/v1/readabilityscore", query, {
       headers: {
-        "X-API-Key": "401bf63e-fa0d-487c-800d-57b2b5282b2c",
+        "X-API-Key": process.env.APIVERVE_API_KEY,
         "Content-Type": "application/json",
       },
     })
