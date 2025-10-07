@@ -47,29 +47,34 @@ export default function Workspace({
   };
 
   return (
-    <div className="h-[calc(100vh-85px)] w-full">
+    <div className="bg-background h-[calc(100vh-85px)] w-full">
       <PanelGroup direction="horizontal">
-        <Panel defaultSize={40} minSize={30} className="p-6">
+        <Panel defaultSize={40} minSize={30} className="overflow-y-auto p-6">
           {description}
           <Interactions statementId={id} />
         </Panel>
-        <PanelResizeHandle className="w-1 cursor-col-resize bg-gray-300 hover:bg-gray-400" />
-        <Panel defaultSize={60} minSize={30} className="bg-red-50 p-4">
-          <div className="relative">
+        <PanelResizeHandle className="bg-border hover:bg-primary w-1.5 cursor-col-resize transition-colors" />
+        <Panel defaultSize={60} minSize={30} className="p-4">
+          <div className="flex h-full flex-col">
             <Input
-              placeholder="Title"
-              className="mb-2 border-4 font-bold"
+              placeholder="Enter your title here..."
+              className="mb-4 border-0 px-2 text-2xl font-bold tracking-tighter shadow-none focus-visible:ring-0"
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
             />
-            <TextEditor content={attempt} onChange={onChange} />
-            <Button
-              className="absolute right-0 mt-2 cursor-pointer"
-              onClick={submitArticle}
-            >
-              Submit
-            </Button>
+            <div className="flex-grow">
+              <TextEditor content={attempt} onChange={onChange} />
+            </div>
+            <div className="mt-4 flex justify-end">
+              <Button
+                className="cursor-pointer"
+                onClick={submitArticle}
+                disabled={!title || !attempt}
+              >
+                Submit Article
+              </Button>
+            </div>
           </div>
         </Panel>
       </PanelGroup>

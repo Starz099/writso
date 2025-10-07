@@ -6,7 +6,7 @@ import Footer from "@/components/layout/footer";
 
 export const metadata: Metadata = {
   title: "Writso",
-  description: "it is a platform to practice writing.",
+  description: "A platform to practice writing.",
 };
 
 export default function RootLayout({
@@ -16,14 +16,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={`antialiased`}>
-        <div className="relative flex min-h-screen flex-col">
-          <Providers>
+      <body
+        suppressHydrationWarning
+        className="bg-background text-foreground antialiased"
+      >
+        <Providers>
+          <div className="relative flex min-h-screen flex-col">
             <Navbar />
-            <div className="flex-1">{children}</div>
-          </Providers>
-          <Footer />
-        </div>
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

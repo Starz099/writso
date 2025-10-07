@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-
-const Prisma = new PrismaClient();
 export const GET = async () => {
   try {
-    const StatementOfTheDay = await Prisma.articleStatement.findMany();
+    const StatementOfTheDay = await prisma.articleStatement.findMany();
 
     return new NextResponse(JSON.stringify(StatementOfTheDay[0]), {
       status: 200,
