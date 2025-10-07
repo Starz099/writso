@@ -25,6 +25,7 @@ const page = async ({
         <div dangerouslySetInnerHTML={{ __html: content as string }} />-
         {authorName}
       </div>
+      <div>score: {submissionData?.score}</div>
       <br />
       <CommentBox submissionId={submission} />
     </div>
