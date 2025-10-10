@@ -30,6 +30,21 @@ export async function GET(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    if (id === "freestyle") {
+      const submissions = await prisma.article.findMany({
+        where: {
+          userId: userId,
+          statementId: null,
+        },
+      });
+
+      return NextResponse.json({
+        submissions,
+        message: `articles fetched for article id ${id}`,
+        status: 200,
+      });
+    }
+
     const submissions = await prisma.article.findMany({
       where: {
         userId: userId,

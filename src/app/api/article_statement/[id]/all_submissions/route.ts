@@ -12,6 +12,19 @@ export async function GET(
   }
 
   try {
+    if (id === "freestyle") {
+      const submissions = await prisma.article.findMany({
+        where: {
+          statementId: null,
+        },
+      });
+      return NextResponse.json({
+        submissions,
+        message: `articles fetched for article id ${id}`,
+
+        status: 200,
+      });
+    }
     const submissions = await prisma.article.findMany({
       where: {
         statementId: id,

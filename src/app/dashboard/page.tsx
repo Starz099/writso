@@ -78,6 +78,11 @@ const Dashboard = async () => {
               </div>
               <DailyStatement />
             </Container>
+            <Container className="mt-4">
+              <Link href="/articles/freestyle">
+                <Button>Freestyle writing</Button>
+              </Link>
+            </Container>
           </Section>
         </div>
         <div className="lg:col-span-1">
@@ -91,7 +96,7 @@ const Dashboard = async () => {
                   <Link href="/articles/my_submissions">View all</Link>
                 </Button>
               </div>
-              <SubmissionsList limit={3} />
+              <SubmissionsList limit={2} />
             </Container>
           </Section>
         </div>

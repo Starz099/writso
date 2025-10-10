@@ -47,10 +47,13 @@ export const getArticles = async (): Promise<Article[] | null> => {
 export const createArticle = async (
   title: string,
   content: string,
-  statementId: string,
   userEmail: string,
+  statementId?: string,
 ): Promise<CreateArticleResponse | null> => {
   try {
+    if (!statementId) {
+      statementId = "freestyle";
+    }
     const response = await apiClient.post<CreateArticleResponse>(
       `/api/article/${statementId}`,
       {

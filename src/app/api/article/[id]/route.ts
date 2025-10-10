@@ -33,13 +33,29 @@ export async function POST(
 
     const score = await calc(content as string);
 
+    if (id === "freestyle") {
+      const article = await prisma.article.create({
+        data: {
+          title: title,
+          userId: userId,
+          content: content,
+          score: score,
+        },
+      });
+
+      return NextResponse.json(
+        { message: "Article submitted successfully", id: article.id },
+        { status: 200 },
+      );
+    }
+
     const article = await prisma.article.create({
       data: {
         title: title,
         userId: userId,
         content: content,
-        statementId: id,
         score: score,
+        statementId: id,
       },
     });
 
