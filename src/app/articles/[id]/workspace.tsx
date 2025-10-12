@@ -36,8 +36,8 @@ export default function Workspace({
       const article = await createArticle(
         title,
         attempt,
-        id,
         session.user.email,
+        id,
       );
       alert("Article submitted successfully");
       router.push(currentPath + "/" + article?.id);
