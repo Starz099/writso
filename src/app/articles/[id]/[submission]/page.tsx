@@ -1,6 +1,7 @@
 import CommentBox from "@/components/ui/comment-box";
 import ShareSubmissionButton from "@/components/ui/share-submission-button";
 import { getSubmissionById } from "@/lib/api";
+import ReviewButton from "./review-button";
 
 const page = async ({
   params,
@@ -27,6 +28,7 @@ const page = async ({
       </div>
       <div>score: {submissionData?.score}</div>
       <br />
+      <ReviewButton content={content as string} />
       <CommentBox submissionId={submission} />
     </div>
   );
